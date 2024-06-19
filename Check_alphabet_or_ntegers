@@ -1,0 +1,8 @@
+a=input()
+b=ord(a)
+if(b>=65 and b<=90)or(b>=97 and b<=122):
+    print("It is a alphabet")
+elif(b>=49 and b<=59):
+    print("It is a integeres")
+else:
+    print("It is a special charater")
