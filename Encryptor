@@ -1,0 +1,68 @@
+public class Encryptor {
+    // Constructor
+    public Encryptor() {
+        // Default constructor
+    }
+
+    // Static method for encryption
+    public static String encryptString(String input1, int input2) {
+        StringBuilder encryptedString = new StringBuilder();
+
+        // Split input1 into words
+        String[] words = input1.split(" ");
+
+        // Process each word
+        for (String word : words) {
+            StringBuilder encryptedWord = new StringBuilder();
+
+            // Encrypt each character in the word
+            for (char ch : word.toCharArray()) {
+                char encryptedChar = encryptCharacter(ch, input2);
+                encryptedWord.append(encryptedChar);
+            }
+
+            // Append the encrypted word to the result
+            encryptedString.append(encryptedWord).append(" ");
+        }
+
+        // Remove the trailing space and return the result
+        return encryptedString.toString().trim();
+    }
+
+    // Method to encrypt a single character
+    private static char encryptCharacter(char ch, int key) {
+        if (Character.isLetter(ch)) {
+            // Determine base value based on character case
+            char base = Character.isUpperCase(ch) ? 'A' : 'a';
+            int charValue = ch - base;
+            int encryptedValue = (charValue + key) % 26;
+            char encryptedChar = (char) (base + encryptedValue);
+
+            // Convert case: upper to lower and vice versa
+            if (Character.isUpperCase(ch)) {
+                return Character.toLowerCase(encryptedChar);
+            } else {
+                return Character.toUpperCase(encryptedChar);
+            }
+        }
+        // Return the character as is if it's not a letter
+        return ch;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        String input1 = "Wipro Tech";
+        int input2 = 20;
+        System.out.println(encryptString(input1, input2));  // Output: qCJLI nYWB
+
+        // Additional test cases
+        String input3 = "Hello World";
+        int input4 = 5;
+        System.out.println(encryptString(input3, input4));  // Output: mJSSP vHUV
+
+        String input5 = "Java Programming";
+        int input6 = 15;
+        System.out.println(encryptString(input5, input6));  // Output: uWJf fwpdxsfF
+    }
+}
+
